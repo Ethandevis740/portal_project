@@ -72,6 +72,13 @@ const Index = () => {
       path: "/profile",
       icon: User,
       color: "bg-pink-500 hover:bg-pink-600"
+    },
+    {
+      title: "Help & Support",
+      description: "Get help and submit queries",
+      path: "/help-support",
+      icon: HelpCircle,
+      color: "bg-teal-500 hover:bg-teal-600"
     }
   ];
 

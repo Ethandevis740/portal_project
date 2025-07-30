@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { 
   Search, 
   ChevronDown, 
@@ -49,12 +50,20 @@ const sidebarItems = [
 
 const bottomSidebarItems = [
   { title: "Profile", icon: User, active: true },
-  { title: "Help & Support", icon: HelpCircle },
+  { title: "Help & Support", icon: HelpCircle, path: "/help-support" },
   { title: "Settings", icon: Settings },
   { title: "Log Out", icon: LogOut },
 ];
 
 const Profile = () => {
+  const navigate = useNavigate();
+
+  const handleNavigation = (path: string) => {
+    if (path) {
+      navigate(path);
+    }
+  };
+
   return (
     <SidebarProvider>
       <div className="min-h-screen flex w-full bg-background">
@@ -95,6 +104,7 @@ const Profile = () => {
                       <SidebarMenuItem key={item.title}>
                         <SidebarMenuButton 
                           className={item.active ? "bg-blue-50 text-blue-600 font-medium" : ""}
+                          onClick={() => item.path && handleNavigation(item.path)}
                         >
                           <item.icon className="h-4 w-4" />
                           <span>{item.title}</span>

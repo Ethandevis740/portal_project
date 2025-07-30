@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Search,
   ChevronDown,
@@ -51,13 +52,21 @@ const sidebarItems = [
 ];
 
 const bottomSidebarItems = [
-  { title: "Profile", icon: User },
-  { title: "Help & Support", icon: HelpCircle },
+  { title: "Profile", icon: User, path: "/profile" },
+  { title: "Help & Support", icon: HelpCircle, path: "/help-support" },
   { title: "Settings", icon: Settings },
   { title: "Log Out", icon: LogOut },
 ];
 
 const Dashboard = () => {
+  const navigate = useNavigate();
+
+  const handleNavigation = (path: string) => {
+    if (path) {
+      navigate(path);
+    }
+  };
+
   const recentOrders = [
     { client: "Junaid Sheikh", date: "17 July 2025", service: "SEO Website", status: "Confirmed" },
     { client: "Amir Hassan", date: "17 July 2025", service: "SEO Packages", status: "Confirmed" },
@@ -124,6 +133,7 @@ const Dashboard = () => {
                     {bottomSidebarItems.map((item) => (
                       <SidebarMenuItem key={item.title}>
                         <SidebarMenuButton>
+                        <SidebarMenuButton onClick={() => item.path && handleNavigation(item.path)}>
                           <item.icon className="h-4 w-4" />
                           <span>{item.title}</span>
                         </SidebarMenuButton>
